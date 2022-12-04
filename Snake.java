@@ -10,9 +10,9 @@ class Snake
     {
         this.head = null;
         this.tail = null;
-        this.insertFirst(new Coord(1, 7), 1, false);
-        this.insertFirst(new Coord(2, 7), 1, false);
-        this.insertFirst(new Coord(3, 7), 1, false);
+        this.insertFirst(new Coord(1, 8), 1, false);
+        this.insertFirst(new Coord(2, 8), 1, false);
+        this.insertFirst(new Coord(3, 8), 1, false);
     }
 
     BodyLink getHead() { return this.head; }
@@ -42,6 +42,15 @@ class Snake
         this.tail = newBodyLink;
     }
 
+    BodyLink deleteFirst()
+    {
+        BodyLink temp = this.head;
+        if (head.getNext() == null) this.tail = null;
+        else this.head.getNext().setPrevious(null);
+        this.head = this.head.getNext();
+        return temp;
+    }
+
     BodyLink deleteLast()
     {
         BodyLink temp = this.tail;
@@ -58,9 +67,10 @@ class Snake
         return this.last;
     }
 
-    void grow()
+    Coord grow()
     {
         insertLast(this.last.getPosition(), this.last.getDirection(), this.last.getDirection() % 2 == 0);
+        return this.last.getPosition();
     }
 }
 

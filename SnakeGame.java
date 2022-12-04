@@ -36,16 +36,15 @@ public class SnakeGame
 
 
 
-
-
-
-
 /*
+ * play button
+ * play again button
+ * 
+ * figure out why apple respawn breaks sometimes
+ * test failsafe boolean state check: if apple is never drawn each frame respawn apple
+ * 
  * bag of possible tiles
  * snake shift and grow add and remove from possible tiles bag
  * respawn also adds and removes possible tiles bag
  * instead of random x and y choose random from 0 to length of possible tiles bag
- * 
- * figure out why apple respawn breaks sometimes
- * add failsafe boolean state check: if apple is never drawn each frame respawn apple
  */
