@@ -1,10 +1,9 @@
 package snake;
 
 import javax.swing.JPanel;
-
+import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Color;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -21,6 +20,7 @@ import java.net.URL;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 
 class Canvas extends JPanel
 {
@@ -36,7 +36,7 @@ class Canvas extends JPanel
     private Timer timer;
     private Timer deathtimer;
     private int delay = 169; //milliseconds
-    private int deathDelay = 469;
+    private int deathDelay = 369;
     //private int delay = 1000;
     private Interface score;
     private Boolean dead;
@@ -52,22 +52,18 @@ class Canvas extends JPanel
             {
                 case KeyEvent.VK_UP:
                 case KeyEvent.VK_W:
-                    System.out.println("UP");
                     targetDirection = 0;
                     break;
                 case KeyEvent.VK_DOWN:
                 case KeyEvent.VK_S:
-                    System.out.println("DOWN");
                     targetDirection = 2;
                     break;
                 case KeyEvent.VK_RIGHT:
                 case KeyEvent.VK_D:
-                    System.out.println("RIGHT");
                     targetDirection = 1;
                     break;
                 case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_A:
-                    System.out.println("LEFT");
                     targetDirection = 3;
                     break;
                 default:
@@ -113,6 +109,8 @@ class Canvas extends JPanel
                     deathclip.start();
                     deathtimer.start();
                     gamemusic.stop();
+                    Frame frame = (Frame) (JFrame) SwingUtilities.getWindowAncestor(getSelf());
+                    frame.showReplay();
                     timer.stop();
                 }
             }
@@ -202,6 +200,7 @@ class Canvas extends JPanel
     }
 
     void start() { this.requestFocus(); timer.start(); gamemusic.start(); gamemusic.loop(Clip.LOOP_CONTINUOUSLY); }
+    JPanel getSelf() { return this; }
 
     Interface getInterface() { return this.score; }
 

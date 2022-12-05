@@ -58,15 +58,15 @@ class Frame extends JFrame
 		sun.setVisible(true);
         sun.setFocusable(false);
 
-        replayButton.setText("start");
-		replayButton.setSize(100, 60);
+        replayButton.setText("replay");
+		replayButton.setSize(150, 60);
         replayButton.setFont(new Font("Serif", Font.PLAIN, 30));
         replayButton.setHorizontalAlignment(SwingConstants.CENTER);
-        replayButton.setVerticalAlignment(SwingConstants.TOP);
-		replayButton.setLocation(300, 450);
+        replayButton.setVerticalAlignment(SwingConstants.CENTER);
+		replayButton.setLocation(275, 585);
         replayButton.setBackground(new Color(198, 132, 255));
-        replayButton.setForeground(Color.WHITE);
-        replayButton.setBorderPainted(false);
+        replayButton.setForeground(Color.BLACK);
+        //replayButton.setBorderPainted(false);
 		replayButton.setVisible(true);
         replayButton.setFocusable(false);
         
@@ -79,6 +79,21 @@ class Frame extends JFrame
             {
                 menu.stopTimer();
                 remove(menu);
+                add(panel);
+                add(panel.getInterface().getScoreDisplay());
+                add(sun);
+                revalidate();
+                repaint();
+                menumusic.stop();
+                panel.start();
+            }
+        });
+
+        replayButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
                 add(panel);
                 add(panel.getInterface().getScoreDisplay());
                 add(sun);
@@ -112,4 +127,11 @@ class Frame extends JFrame
     }
 
     Canvas getPanel() { return panel; }
+
+    void showReplay()
+    {
+        this.add(replayButton);
+        this.revalidate();
+        this.repaint();
+    }
 }
